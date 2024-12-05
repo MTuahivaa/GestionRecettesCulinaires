@@ -1,3 +1,7 @@
+# Disclaimer
+
+Ce projet a été réalisé par des étudiants de l'Université de la Polynésie Française en 3ème de Licence Informatique. 
+
 # Système de Gestion de Recettes Culinaires
 
 ## Description générale  
