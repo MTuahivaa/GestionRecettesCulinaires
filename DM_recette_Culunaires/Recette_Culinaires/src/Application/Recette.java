@@ -86,13 +86,9 @@ public class Recette {
 		return noteGeneral;
 	}
 
-	public void setNoteGeneral(float noteGeneral) {
+	/*public void setNoteGeneral(float noteGeneral) {
 		this.noteGeneral = noteGeneral;
-	}
-
-	public int getIdentifaintRecette() {
-		return IdentifaintRecette;
-	}
+	}*/
 
 	public String getCreateur() {
 		return Createur;
@@ -102,9 +98,9 @@ public class Recette {
 		return viewCount;
 	}
 	
-	protected void setViewCount(int nb) {
+	/*protected void setViewCount(int nb) {
 		this.viewCount = nb;
-	}
+	}*/
 
 	public List<Commentaire> getListeDeCommentaires() {
 		return listeDeCommentaires;
@@ -116,13 +112,35 @@ public class Recette {
 		return nouveauCommentaire;
 	}
 	
-	public static Ingredient trouverIngredientParNom(String nom, List<Ingredient> listeIngredientsExistants) {
+	public void MiseAjourDeLaNoteGeneral() {
+		float res = CalculeDeLaMoyenne(listeDeCommentaires);
+		this.noteGeneral = res;
+	}
+	
+	private float CalculeDeLaMoyenne(List<Commentaire> commentaires) {
+		if (commentaires == null || commentaires.isEmpty()) {
+	        return 0; 
+	    }
+	    
+	    float somme = 0;
+	    for (Commentaire commentaire : commentaires) {
+	        somme += commentaire.getNoteDonner(); 
+	    }
+	    
+	    float moyenne =  somme / commentaires.size();
+	    
+	    
+	    return Math.round(moyenne * 10) / 10.0f;
+	    
+	}
+	
+	private static Ingredient trouverIngredientParNom(String nom, List<Ingredient> listeIngredientsExistants) {
 	    return listeIngredientsExistants.stream()
 	            .filter(ingredient -> ingredient.getNom().equalsIgnoreCase(nom))
 	            .findFirst()
 	            .orElseGet(() -> {
 	                // on créer un nouvel objet de type Ingredient si il n'existe pas déja
-	                int nouvelId = listeIngredientsExistants.size() + 1; // Générer un ID unique (par exemple, basé sur la taille actuelle)
+	                int nouvelId = listeIngredientsExistants.size() + 1;
 	                Ingredient nouvelIngredient = new Ingredient(nouvelId, nom);
 	                listeIngredientsExistants.add(nouvelIngredient); // Ajouter à la liste des ingrédients existants
 	                return nouvelIngredient;
