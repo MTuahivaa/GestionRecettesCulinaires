@@ -11,20 +11,17 @@ public class MainApp extends JFrame {
 
     public MainApp() {
         appData = new ApplicationRecetteCulinaire();
-        creerDonneesTest(); // Ajout de données de test
+        creerDonneesTest();
 
-        // Configuration de la fenêtre
         setTitle("Écran de Connexion");
         setSize(400, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Panel principal
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(5, 1, 10, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Composants de connexion
         JLabel lblUsername = new JLabel("Nom d'utilisateur :");
         JTextField txtUsername = new JTextField();
         JLabel lblPassword = new JLabel("Mot de passe :");
@@ -33,7 +30,6 @@ public class MainApp extends JFrame {
         JLabel lblMessage = new JLabel("", SwingConstants.CENTER);
         lblMessage.setForeground(Color.RED);
 
-        // Action du bouton
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -47,20 +43,16 @@ public class MainApp extends JFrame {
                 }
             }
         });
-
-        // Ajout des composants au panneau
         mainPanel.add(lblUsername);
         mainPanel.add(txtUsername);
         mainPanel.add(lblPassword);
         mainPanel.add(txtPassword);
         mainPanel.add(btnLogin);
 
-        // Conteneur principal
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(mainPanel, BorderLayout.CENTER);
         getContentPane().add(lblMessage, BorderLayout.SOUTH);
 
-        // Rendre visible
         setVisible(true);
     }
 
@@ -70,10 +62,8 @@ public class MainApp extends JFrame {
     }
 
     private void afficherEcranPrincipal() {
-        // Fermeture de la fenêtre actuelle
         dispose();
 
-        // Nouvelle fenêtre pour l'écran principal
         JFrame mainFrame = new JFrame("Application Recette Culinaire");
         mainFrame.setSize(500, 300);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
