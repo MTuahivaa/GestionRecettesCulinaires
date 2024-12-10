@@ -29,6 +29,7 @@ public class MainApp extends JFrame {
         JButton btnLogin = new JButton("Se connecter");
         JLabel lblMessage = new JLabel("", SwingConstants.CENTER);
         lblMessage.setForeground(Color.RED);
+        JButton btnCreateUser = new JButton("Créer un utilisateur");
 
         btnLogin.addActionListener(new ActionListener() {
             @Override
@@ -37,17 +38,25 @@ public class MainApp extends JFrame {
                 String password = new String(txtPassword.getPassword());
                 if (validerConnexion(username, password)) {
                     lblMessage.setText("Connexion réussie !");
-                    afficherEcranPrincipal();
+                    afficherEcranPrincipal(username);
                 } else {
                     lblMessage.setText("Échec de la connexion. Veuillez réessayer.");
                 }
             }
+        });
+        
+        btnCreateUser.addActionListener(new ActionListener() {
+        	 @Override
+             public void actionPerformed(ActionEvent e) {
+                 afficherEcranDeCreationUtilisateur();
+             }
         });
         mainPanel.add(lblUsername);
         mainPanel.add(txtUsername);
         mainPanel.add(lblPassword);
         mainPanel.add(txtPassword);
         mainPanel.add(btnLogin);
+        mainPanel.add(btnCreateUser);
 
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(mainPanel, BorderLayout.CENTER);
@@ -61,25 +70,14 @@ public class MainApp extends JFrame {
                 .anyMatch(user -> (user.getNom() + " " + user.getPrenom()).equals(username) && user.getPassword().equals(password));
     }
 
-    private void afficherEcranPrincipal() {
+    private void afficherEcranPrincipal(String User) {
         dispose();
 
-        JFrame mainFrame = new JFrame("Application Recette Culinaire");
-        mainFrame.setSize(500, 300);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setLocationRelativeTo(null);
-
-        JPanel panel = new JPanel(new BorderLayout());
-        JLabel lblWelcome = new JLabel("Bienvenue dans l'application !", SwingConstants.CENTER);
-        JButton btnQuit = new JButton("Quitter");
-
-        btnQuit.addActionListener(e -> System.exit(0));
-
-        panel.add(lblWelcome, BorderLayout.CENTER);
-        panel.add(btnQuit, BorderLayout.SOUTH);
-
-        mainFrame.add(panel);
-        mainFrame.setVisible(true);
+        new PageUtilisateur(appData, User);
+    }
+    
+    private void afficherEcranDeCreationUtilisateur() {
+    	
     }
 
     private void creerDonneesTest() {
